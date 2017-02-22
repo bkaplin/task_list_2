@@ -1,0 +1,105 @@
+{% extends "base.html" %}
+
+
+{% load staticfiles %}
+
+    <!-- Bootstrap core CSS -->
+    <link href="../static/css/bootstrap.min.css" rel="stylesheet">
+	<link href="../static/css/style.css" rel="stylesheet">
+    <link href="../static/css/starter-template.css" rel="stylesheet">
+    <script src="../static/js/ie-emulation-modes-warning.js"></script>
+=======
+  
+{% block title %}Main{% endblock title %}
+
+
+{% block active_main %}active{% endblock active_main %}
+
+
+{% block content %}	
+		<div class='container'>
+			<div class="jumbotron">
+			<!--{% if messages %}-->
+				<!--{% for message in messages %}-->
+				<!--<div class="jumbotron">-->
+					<!--{{ message }}-->
+				<!--</div>-->
+				<!--{% endfor %}-->
+			<!--{% endif %}-->
+
+			<a href="{% url 'tasks:add' %}">
+				<button type="button" class="btn btn-default btn-lg">
+					<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>Добавить новую задачу
+				</button>
+			</a>
+				<div class="row">
+					<div class="col-md-10">
+						<table class="table table-striped">
+							<thead>
+							  <tr>
+								<th><h2>Задачи</h2></th>
+							  </tr>
+						  	</thead>
+							<tbody>
+							{% if new_task %}
+								<tr>
+									<td>
+										<form class="navbar-form pull-left" method="post">
+											{% csrf_token %}
+											{{ form.as_p }}
+											<button type="submit" class="btn" href="{% url 'tasks:index' %}">Сохранить</button>
+										</form>
+									</td>
+								</tr>
+							{% endif %}
+							{% if tasks %}
+								{% for task in tasks %}
+								<tr>
+									{% if task.pk == update_pk %}
+										<td>
+											<form class="navbar-form pull-left" method="post">
+												{% csrf_token %}
+												{{ form.as_p }}
+													<button type="submit" class="btn" href="{% url 'tasks:index' %}">Сохранить</button>
+											</form>
+										</td>
+									{% elif task.pk == remove_pk %}
+										<td>
+											<form class="navbar-form pull-left" method="post">
+												{% csrf_token %}
+												{{ form.as_p }}
+												<button type="submit" class="btn">Удалить</button>
+											</form>
+										</td>
+									{% else %}
+
+										<td>
+
+											<h3>{{ task.description }}</h3>
+										</td>
+										<td>
+											<a href="{% url 'tasks:update' task.id %}">
+												<button type="button" class="btn btn-default btn-lg">
+												<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> Изменить
+												</button>
+											</a>
+										</td>
+										<td>
+											<a href="{% url 'tasks:remove' task.id %}">
+												<button type="button" class="btn btn-default btn-lg">
+												<span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Удалить
+												</button>
+											</a>
+										</td>
+									{% endif %}
+								</tr>
+								{% endfor %}
+							{% endif %}
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+{% endblock content %}
+		

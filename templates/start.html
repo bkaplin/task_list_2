@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+
+{% load staticfiles %}
+
+    <!-- Bootstrap core CSS -->
+    <link href="../static/css/bootstrap.min.css" rel="stylesheet">
+	<link href="../static/css/style.css" rel="stylesheet">
+    <link href="../static/css/starter-template.css" rel="stylesheet">
+    <script src="../static/js/ie-emulation-modes-warning.js"></script>
+  
+{% block title %}Start{% endblock title %}
+
+
+{% block content %}
+	<div class="container">
+		<a href="{% url 'tasks:index' %}">
+			<button type="button" class="btn btn-default btn-lg">
+				<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>Начать
+			</button>
+		</a>
+	</div>
+{% endblock content %}
+		
