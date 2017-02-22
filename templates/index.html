@@ -33,7 +33,7 @@
 				</button>
 			</a>
 				<div class="row">
-					<div class="col-md-10">
+					<div class="col-md-18">
 						<table class="table table-striped">
 							<thead>
 							  <tr>
@@ -94,6 +94,12 @@
 									{% endif %}
 								</tr>
 								{% endfor %}
+							{% else %}
+								<tr>
+									<td>
+										<h3>Пока нет ни одного задания</h3>
+									</td>
+								</tr>
 							{% endif %}
 							</tbody>
 						</table>

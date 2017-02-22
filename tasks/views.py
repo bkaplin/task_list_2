@@ -54,12 +54,17 @@ def remove(request, pk):
     context = {}
     context['remove_pk'] = int(pk)
     print context
-    task = Task.objects.get(id=pk)
-    task.delete()
-    mes = u'Task has been deleted.'
-    messages.success(request, mes)
-    context['tasks'] = Task.objects.all()
-    return render(request, 'index.html', context)
+    try:
+        task = Task.objects.get(id=pk)
+    except:
+        context['tasks'] = Task.objects.all()
+        return redirect("tasks:index")
+    else:
+        task.delete()
+        mes = u'Task has been deleted.'
+        messages.success(request, mes)
+        context['tasks'] = Task.objects.all()
+        return render(request, 'index.html', context)
 
 # class TaskCreateView(CreateView):
 #     model = Task
