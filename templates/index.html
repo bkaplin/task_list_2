@@ -5,7 +5,7 @@
 
     <!-- Bootstrap core CSS -->
     <link href="../static/css/bootstrap.min.css" rel="stylesheet">
-	<link href="../static/css/style.css" rel="stylesheet">
+	<!--<link href="../static/css/style.css" rel="stylesheet">-->
     <link href="../static/css/starter-template.css" rel="stylesheet">
     <script src="../static/js/ie-emulation-modes-warning.js"></script>
 =======
@@ -16,7 +16,14 @@
 {% block active_main %}active{% endblock active_main %}
 
 
-{% block content %}	
+{% block content %}
+	<center>
+		<div class='container'>
+			<div class="jumbotron">
+				<h1><a href="{% url 'tasks:index' %}">Задачи</a></h1>
+			</div>
+		</div>
+	</center>
 		<div class='container'>
 			<div class="jumbotron">
 			<!--{% if messages %}-->
@@ -27,17 +34,20 @@
 				<!--{% endfor %}-->
 			<!--{% endif %}-->
 
-			<a href="{% url 'tasks:add' %}">
-				<button type="button" class="btn btn-default btn-lg">
-					<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>Добавить новую задачу
-				</button>
-			</a>
-				<div class="row">
-					<div class="col-md-18">
-						<table class="table table-striped">
+
+				<div class="container">
+					<div>
+						<center>
+							<table class="table table-striped">
 							<thead>
 							  <tr>
-								<th><h2>Задачи</h2></th>
+								<th>
+								<a href="{% url 'tasks:add' %}">
+									<button type="button" class="btn btn-default btn-lg">
+										<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>Добавить новую задачу
+									</button>
+								</a>
+								</th>
 							  </tr>
 						  	</thead>
 							<tbody>
@@ -73,27 +83,137 @@
 										</td>
 									{% else %}
 
-										<td>
-
-											<h3>{{ task.description }}</h3>
-										</td>
+											<td>
+												<a href="{% url 'tasks:detail' task.id %}">
+													<h3>{{ task.description }}</h3>
+												</a>
+											</td>
+											<td><br></td>
+											<td><br></td>
+											<td><br></td>
 										<td>
 											<a href="{% url 'tasks:update' task.id %}">
 												<button type="button" class="btn btn-default btn-lg">
-												<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> Изменить
+												<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
 												</button>
 											</a>
 										</td>
 										<td>
 											<a href="{% url 'tasks:remove' task.id %}">
 												<button type="button" class="btn btn-default btn-lg">
-												<span class="glyphicon glyphicon-remove" aria-hidden="true"></span> Удалить
+												<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
 												</button>
 											</a>
 										</td>
 									{% endif %}
-								</tr>
+									</tr>
+
+									{% if detail_pk == task.pk %}
+									<!--<table class="table ta" align="center">-->
+
+										<thead>
+										  <tr>
+											  <td><br></td>
+											<th><h2>Подзадачи</h2>
+												<a href="{% url 'tasks:add_subtask' task.id %}">
+													<button type="button" class="btn btn-default btn-lg">
+														<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>Добавить новую подзадачу
+													</button>
+												</a>
+											</th>
+										  </tr>
+										</thead>
+										<!--<tbody>-->
+
+										{% if new_subtask == task.pk %}
+
+											<tr>
+												<td><br></td>
+												<td>
+													<form class="navbar-form pull-left" method="post">
+														{% csrf_token %}
+														{{ form.as_p }}
+														<button type="submit" class="btn" href="{% url 'tasks:index' %}">Сохранить</button>
+													</form>
+												</td>
+												<td><br></td>
+												<td><br></td>
+												<td><br></td>
+												<td><br></td>
+											</tr>
+										{% endif %}
+										{% if subtasks %}
+											{% for subtask in subtasks %}
+												<tr>
+												{% if subtask.pk == subtask_update_pk %}
+													<td><br></td>
+													<td>
+														<form class="navbar-form pull-left" method="post">
+															{% csrf_token %}
+															{{ form.as_p }}
+																<button type="submit" class="btn" href="{% url 'tasks:index' %}">Сохранить</button>
+														</form>
+													</td>
+													<td><br></td>
+													<td><br></td>
+													<td><br></td>
+													<td><br></td>
+												{% elif subtask.pk == subtask_remove_pk %}
+													<td>
+														<form class="navbar-form pull-left" method="post">
+															{% csrf_token %}
+															{{ form.as_p }}
+															<button type="submit" class="btn">Удалить</button>
+														</form>
+													</td>
+												{% else %}
+													<td><br></td>
+
+													<td>
+														<h3>{{ subtask.description }}</h3>
+													</td>
+													<td><br></td>
+													<td><br></td>
+													<td>
+														<a href="{% url 'tasks:update_subtask' subtask.id %}">
+															<button type="button" class="btn btn-default btn-lg">
+															<span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+															</button>
+														</a>
+													</td>
+													<td>
+														<a href="{% url 'tasks:remove_subtask' subtask.id %}">
+															<button type="button" class="btn btn-default btn-lg">
+															<span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+															</button>
+														</a>
+													</td>
+												{% endif %}
+												</tr>
+											{% endfor %}
+											</div>
+											</div>
+										{% else %}
+											<tr>
+											  	<td><br></td>
+												<td>
+													<h3>Пока нет ни одного подзадания</h3>
+												</td>
+												<td><br></td>
+												<td><br></td>
+												<td><br></td>
+												<td><br></td>
+											</tr>
+
+										{% endif %}
+
+
+									{% endif %}
+
 								{% endfor %}
+										<!--</tbody>-->
+									<!--</table>-->
+
 							{% else %}
 								<tr>
 									<td>
@@ -103,6 +223,7 @@
 							{% endif %}
 							</tbody>
 						</table>
+					<center>
 					</div>
 				</div>
 			</div>

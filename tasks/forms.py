@@ -1,5 +1,5 @@
 from django import forms
-from tasks.models import Task
+from tasks.models import Task, Subtask
 
 class symbolWidget(forms.Textarea):
 	def __init__(self, *args, **kwargs):
@@ -9,7 +9,11 @@ class symbolWidget(forms.Textarea):
 class TaskModelForm(forms.ModelForm):
 	class Meta:
 		model = Task
-		fields = ['description']
+	fields = '__all__'#['description']
 	description = forms.CharField(widget=symbolWidget, max_length=70)
 
-
+class SubtaskModelForm(forms.ModelForm):
+	class Meta:
+		model = Subtask
+	fields = '__all__'#['description']
+	description = forms.CharField(widget=symbolWidget, max_length=70)
