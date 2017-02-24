@@ -14,11 +14,15 @@
 
 {% block content %}
 	<div class="container">
-		<a href="{% url 'tasks:index' %}">
-			<button type="button" class="btn btn-default btn-lg">
-				<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>Начать
-			</button>
-		</a>
+		<div class="jumbotron">
+			<a href="{% url 'tasks:index' %}">
+				<center>
+					<button type="button" class="btn btn-default btn-lg">
+						<span class="glyphicon" aria-hidden="true"></span>Начать
+					</button>
+				</center>
+			</a>
+		</div>
 	</div>
 {% endblock content %}
 		
