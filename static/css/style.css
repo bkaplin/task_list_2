@@ -8,7 +8,7 @@ body{
 	color: red;
 }
 .t_name{
-	font-family: Arial;	
+	font-family: Arial;
 	color: green;
 }
 .t_skype{
@@ -16,15 +16,15 @@ body{
 	color: green;
 }
 .t_mail{
-	font-family: Arial, cursive;	
+	font-family: Arial, cursive;
 	color: green;
 }
 .t_tel{
-	font-family: "Courier New", Courier, monospace;	
+	font-family: "Courier New", Courier, monospace;
 	color: green;
 }
 .name{
-	font-family: Arial;	
+	font-family: Arial;
 	color: blue;
 }
 .skype{
@@ -32,18 +32,18 @@ body{
 	color: blue;
 }
 .mail{
-	font-family: Arial, cursive;	
+	font-family: Arial, cursive;
 	color: blue;
 }
 .tel{
-	font-family: "Courier New", Courier, monospace;	
+	font-family: "Courier New", Courier, monospace;
 	color: blue;
 }
 .Title{
-	font-family: "Courier New", Courier, monospace;	
+	font-family: "Courier New", Courier, monospace;
 	color: blue;
 =======
-	background: url("../images/fon_1.jpg");
+	/*background: url("../images/fon_1.jpg");*/
 >>>>>>> ac0ff28bff554e176023dc3105e23cd2c1ecb204
 }
 .red{
@@ -51,7 +51,7 @@ body{
 	color: red;
 }
 .t_name{
-	font-family: Arial;	
+	font-family: Arial;
 	color: green;
 }
 .t_skype{
@@ -59,15 +59,15 @@ body{
 	color: green;
 }
 .t_mail{
-	font-family: Arial, cursive;	
+	font-family: Arial, cursive;
 	color: green;
 }
 .t_tel{
-	font-family: "Courier New", Courier, monospace;	
+	font-family: "Courier New", Courier, monospace;
 	color: green;
 }
 .name{
-	font-family: Arial;	
+	font-family: Arial;
 	color: blue;
 }
 .skype{
@@ -75,15 +75,15 @@ body{
 	color: blue;
 }
 .mail{
-	font-family: Arial, cursive;	
+	font-family: Arial, cursive;
 	color: blue;
 }
 .tel{
-	font-family: "Courier New", Courier, monospace;	
+	font-family: "Courier New", Courier, monospace;
 	color: blue;
 }
 .Title{
-	font-family: "Courier New", Courier, monospace;	
+	font-family: "Courier New", Courier, monospace;
 	color: blue;
 }
 
