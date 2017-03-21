@@ -116,9 +116,6 @@ class SubtaskCreateView(CreateView):
     # context = get_context_data(model)
     def get_success_url(self):
         return reverse('tasks:detail', kwargs={'pk': self.object.task.id})
-    # def get_absolute_url(self):
-    #     return reverse('tasks:index', kwargs={'detail_pk': self.task.pk})
-        # return reverse_lazy('tasks:index')
     def get_initial(self):
         return {'task': self.kwargs['pk']}
     def form_valid(self, form):
