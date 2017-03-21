@@ -2,7 +2,7 @@ from tasks.models import Task, Subtask
 from tasks.forms import TaskModelForm, SubtaskModelForm
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
-from django.core.urlresolvers import reverse_lazy
+from django.core.urlresolvers import reverse_lazy, reverse
 # from django.views.generic.detail import DetailView
 from django.views.generic.list import ListView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
@@ -115,7 +115,9 @@ class SubtaskCreateView(CreateView):
         return context
     # context = get_context_data(model)
     def get_success_url(self):
-        return reverse_lazy('tasks:index')
+        return reverse('tasks:detail', kwargs={'pk': self.object.task.id})
+    # def get_absolute_url(self):
+    #     return reverse('tasks:index', kwargs={'detail_pk': self.task.pk})
         # return reverse_lazy('tasks:index')
     def get_initial(self):
         return {'task': self.kwargs['pk']}
